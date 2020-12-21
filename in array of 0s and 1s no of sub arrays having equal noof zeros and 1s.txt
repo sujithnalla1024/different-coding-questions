@@ -1,0 +1,62 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static int meth(int a[])
+    {
+        int count=0;
+        Map<Integer,Integer> mp=new HashMap<>();
+        for(int i=0;i<a.length;i++)
+        {
+              if(mp.containsKey(a[i]))
+                mp.put(a[i],mp.get(a[i])+1);
+            else
+                mp.put(a[i],1);
+        }
+        //List<Integer> lt=new ArrayList<>();
+        //lt=mp.values();
+        for(int i:mp.values())
+        {
+            if(i>1)
+            {
+                count+=(((i)*(i-1))/2);
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args)throws IOException {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb=new StringBuilder();
+        int q=Integer.parseInt(br.readLine());
+        for(int y=0;y<q;y++)
+        {
+            int n=Integer.parseInt(br.readLine());
+            int a[]=new int[n];
+            StringTokenizer st=new StringTokenizer(br.readLine());
+            int j=0;
+            while(st.hasMoreTokens())
+            {
+                a[j]=Integer.parseInt(st.nextToken());j++;
+            }
+            int temp[]=new int[n];
+            for(int i=0;i<n;i++)
+            {
+                if(a[i]==0)
+                    a[i]=-1;
+            }
+            temp[0]=a[0];int count=0;
+            if(temp[0]==0)
+            count++;
+            for(int i=1;i<n;i++)
+                {temp[i]=temp[i-1]+a[i];
+                if(temp[i]==0)
+                count++;
+                }
+             count+=meth(temp);
+            sb.append(count+"\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

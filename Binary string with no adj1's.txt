@@ -1,0 +1,24 @@
+//Qn is to read a length n for each test case and among all possible binary strings of length n find noof nonadjacent binary strings among them
+// This qn simply follows fibanocci series where dp[i] tells count of nonadjacent1s binarystrings of length i  
+//so dp[1]=2 dp[2]=3 then for i from 3 to n dp[i]=dp[i-1]+dp[i-2];
+import java.io.*;
+import java.util.*;
+public class Solution {
+static int m=1000000007;
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+      int dp[]=new int[100001];
+      dp[2]=3;
+      dp[1]=2;
+      for(int i=3;i<=100000;i++){
+        dp[i]=(dp[i-1]%m+dp[i-2]%m)%m;
+      }
+      int t=s.nextInt();
+      StringBuilder sb=new StringBuilder();
+      while(t-->0){
+        int n=s.nextInt();
+        sb.append(dp[n]+"\n");
+      }
+      System.out.println(sb.toString());
+    }
+}

@@ -1,0 +1,36 @@
+import java.util.*;
+import java.io.*;
+public class HelloWorld{
+     public static void main(String []args)throws IOException{
+ BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+         StringBuilder sb=new StringBuilder();
+        int t=Integer.parseInt(br.readLine());
+        for(int e=0;e<t;e++)
+        {
+            int n=Integer.parseInt(br.readLine());
+            int a[]=new int[n];
+            StringTokenizer stu=new StringTokenizer(br.readLine());int y=0;
+            while(stu.hasMoreTokens())
+            {
+            a[y]=Integer.parseInt(stu.nextToken());
+                y++;
+            }
+            int b[]=new int[n];
+            Stack<Integer> st=new Stack<>();
+            b[0]=1;
+            st.push(0);
+            for(int i=1;i<n;i++)
+            {
+                while(!st.isEmpty()&&(a[i]>=a[st.peek()]))
+                {
+                    st.pop();
+                }
+                b[i]=st.isEmpty()?(i+1):(i-st.peek());
+                st.push(i);
+            }
+        for(int f:b)
+        sb.append(f+" ");;
+        sb.append("\n");
+     }System.out.println(sb.toString());
+     }
+}

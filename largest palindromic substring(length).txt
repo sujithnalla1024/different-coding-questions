@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static int check(String s,int n)
+    {
+        int ans=1;int low;int high;
+        for(int i=1;i<n;i++)
+        {
+            low=i-1;high=i;//even length palindrome
+            while((low>=0)&&(high<n)&&(s.charAt(low)==s.charAt(high)))
+            {
+                ans=Math.max(ans,(high-low+1));
+                low--;
+                high++;
+            }
+            low=i-1;high=i+1;//odd length palindrome
+            while((low>=0)&&(high<n)&&(s.charAt(low)==s.charAt(high)))
+            {
+                ans=Math.max(ans,(high-low+1));
+                low--;high++;
+            }
+            
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        int k=s.nextInt();
+        for(int u=0;u<k;u++)
+        {
+            int n=s.nextInt();
+            s.nextLine();
+            String a=s.next();
+            System.out.println(check(a,n));
+        }
+    }
+}

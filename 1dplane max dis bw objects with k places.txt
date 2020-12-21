@@ -1,0 +1,70 @@
+//question link:https://www.spoj.com/submit/AGGRCOW/
+//u have to take frst position in order to miximise the distance 
+//solution:
+import java.util.*;
+public class HelloWorld{
+    static int meth(int a[],int mid)
+    {
+        int count=1;int sum=0;
+        for(int i=1;i<a.length;i++)
+        {
+            sum+=a[i]-a[i-1];
+            if(sum>=mid)
+            {
+                count++;
+                sum=0;
+            }
+        }
+        return count;
+    }
+
+     public static void main(String []args){
+         Scanner s=new Scanner(System.in);
+        int y=s.nextInt();
+        for(int q=0;q<y;q++){
+        int n=s.nextInt();
+        int k=s.nextInt();
+        int a[]=new int[n];
+        int max=Integer.MIN_VALUE;int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            a[i]=s.nextInt();
+        }
+        Arrays.sort(a);
+        int low=a[0],high=a[n-1];int mid;int ans=0;
+        while(low<=high)
+        {mid=(low+high)/2;
+        if(meth(a,mid)<k)
+        {
+            high=mid-1;
+        }
+        else{ans=mid;
+        low=mid+1;
+        }
+        }
+        System.out.println(ans);}
+        
+        
+        
+     }
+}
+testcases:
+1
+5 3
+1
+2
+8
+4
+9
+explaination:
+5 array elements first sort
+1 2 4 8 9
+out of  places frst place reserved so finding 2 places
+mid=1+9/2=5
+so 1st cow at 1
+second one at 8as per code 
+no place for third cow so return 2<3 so searching on left side 
+mid=1+5/2=3
+frst one at 1 second one at 4 third one at 8 count =3 returned)which is >=3
+so answer =3 serching for any number >3 size can fit 3 cows so 3+5/2=4
+so frst cow at 1 second one at 8 no third one can be placed so sarching on left of 4 that is 3+4/2=3 fits and next iteraion low=h and again 3=3 so while loop stops and ans will be stored as 3

@@ -1,0 +1,40 @@
+//given size of matrix and values at each cell of matrix we have to move from top left to right mostbottom choosing a path such that u should have maximum noof sum of elements in ur path and u can only move down and right
+//As we can only move down and right so let dp(i,j)=Max noof apples can be collected to reach i,j from starting position
+//So we dp(i,j) depends on its top position dp(i-1,j) and-- its left position dp(i,j-1)
+//So dp(i,j)=(Math.max(dp(i-1,j),dp(i,j-1)) + (app[i][j])(apples at curent position)) 
+//Base condns:
+//Frst row has only one path from orgin so dp[o,i]=dp[0,i-1]+app[0,i]
+//similarly frst column has dp[i,o]=dp[i-1,0]+app[i,0]  
+import java.io.*;
+import java.util.*;
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner s=new Scanner(System.in);
+        StringBuilder sb=new StringBuilder();
+        int t=s.nextInt();
+        while(t-->0){
+            int n=s.nextInt();
+            int m=s.nextInt();
+            int app[][]=new int[n][m];
+            for(int i=0;i<n;i++){
+                for(int j=0;j<m;j++)
+                    app[i][j]=s.nextInt();
+            }
+            int dp[][]=new int[n][m];
+            dp[0][0]=app[0][0];
+            for(int i=1;i<n;i++)
+            dp[i][0]=app[i][0]+dp[i-1][0];
+            for(int j=1;j<m;j++)
+                dp[0][j]=app[0][j]+dp[0][j-1];
+            for(int i=1;i<n;i++){
+                for(int j=1;j<m;j++){
+                    dp[i][j]=(Math.max(dp[i-1][j],dp[i][j-1])+app[i][j]);
+                }
+            }
+            sb.append(dp[n-1][m-1]+"\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

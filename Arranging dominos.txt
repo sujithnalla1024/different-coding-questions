@@ -1,0 +1,28 @@
+//In this question u need to fill an area of 5crossN  with a dominos of 5*1 or 5*2 both can be used either horizontally or vertically find the noof ways to fill the area with these 2 dominos
+//Here let dp(i) denotes the noof ways we can fill the 5*i place with dominos
+//If we put a vertical tile of 5*1 vertical it depends on noof ways we fill the area of dp(n-1) and similarly if we put a vertical 5*2 tile at ith position it depends on noof ways we fill the dp(i-2) place
+//so as of now dp(i)=dp(i-1)+dp(i-2)
+//if we place a horizontal tile it covers 5 unitshorizontal place so if one horizontal tile is placed deffinetly there should not be vertical tiles ha vertic space is 5 units so if one horizantal tile is placed all under even must be horizontal
+//so noof ways we can fill a vertical 5 units space with horontal tiles(1*5,2*5) is 8(11111,1211,2111,1121,1112,112,211,121) so we sholuld add this even to dp state so dp(i-5)*8
+so overrall dp(i)=dp(i-1)+dp(i-2)+8*dp(i-5)      
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+ static int m=1000000007;
+    public static void main(String[] args) {
+      Scanner s=new Scanner(System.in);
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+      StringBuilder sb=new StringBuilder();
+      long dp[]=new long[1000001];
+      dp[0]=1;dp[1]=1;dp[2]=2;dp[3]=3;dp[4]=5;
+      for(int i=5;i<=1000000;i++){
+        dp[i]=(dp[i-1]+dp[i-2]+((8*(dp[i-5]))%m))%m;
+      }
+      int t=s.nextInt();
+      while(t-->0){
+        sb.append(dp[s.nextInt()]+"\n");
+      }
+      System.out.println(sb.toString());
+    }
+}

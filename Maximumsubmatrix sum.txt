@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+//In this frst we are creating colum wise prefix sum of given matrix
+//then we are fixing two rows so let that two rows be i and k then a[k][j]-a[i-1][j] gives the sum of fixed row moving the sum forward if and only if tempsum is +ve same as we did in kadanes algo then updating ans at each stage with temp sum.
+//this is also called as 2d kadanes algorithm.
+//Tc is(n*m+n^2*m)-------->n*m for calculating colum wise cumulative sum and ----n^2 for fixing 2 rows and *m for carrying the cumulqtive sum of fixed rows sum forward over the column wise.  
+public class Solution {
+static int meth(int a[][],int n,int m){
+    for(int j=0;j<m;j++){
+        for(int i=1;i<n;i++){
+            a[i][j]=a[i][j]+a[i-1][j];
+        }
+    }
+    int ans=Integer.MIN_VALUE;
+    for(int i=0;i<n;i++){
+        for(int k=i;k<n;k++){
+           int tempsum=0;
+            for(int j=0;j<m;j++){
+                tempsum+=(a[k][j]-(i==0 ? 0 : a[i-1][j]));
+                ans=Math.max(ans,tempsum);
+                tempsum=Math.max(tempsum,0);
+            }
+        }
+    }
+    return ans;
+}
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        StringBuilder sb=new StringBuilder(); 
+        int t=s.nextInt();
+        while(t-->0){
+            int n=s.nextInt();
+            int m=s.nextInt();
+            int a[][]=new int[n][m];
+            for(int i=0;i<n;i++){
+                for(int j=0;j<m;j++){
+                    a[i][j]=s.nextInt();
+                }
+            }
+            sb.append(meth(a,n,m)+"\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

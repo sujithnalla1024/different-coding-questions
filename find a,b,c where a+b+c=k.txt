@@ -1,0 +1,75 @@
+//sort using merge sort Tc(mergesort-nlogn+n^2(one moving pointer-i),(other L-i+1)(another pointing always last)
+
+import java.util.*;
+public class Solution{
+static void mergesort(int a[],int low,int high)
+{
+    if(low==high)
+    return;
+    else
+    {
+        int mid=(low+high)/2;
+        mergesort(a,low,mid);
+        mergesort(a,mid+1,high);
+        merge(a,low,high);
+    }
+    
+}
+static void merge(int a[],int low,int high)
+{int k=0;
+    int temp[]=new int[high-low+1];
+    int i=low;int mid=(low+high)/2;
+    int j=mid+1;
+    while((i<=mid)&&(j<=high))
+    {if(a[i]<=a[j])
+        temp[k++]=a[i++];
+    else
+    temp[k++]=a[j++];
+    
+    }
+    while(i<=mid)
+    temp[k++]=a[i++];
+    while(j<=high)
+    temp[k++]=a[j++];
+    for(int u=low;u<=high;u++)
+    a[u]=temp[u-low];
+}
+
+     public static void main(String []args){
+    Scanner s=new Scanner(System.in);
+    int w=s.nextInt();
+    for(int p=0;p<w;p++){
+    int n=s.nextInt();
+    int k=s.nextInt();
+    int a[]=new int[n];
+    for(int i=0;i<n;i++)
+    a[i]=s.nextInt();int t=0;
+    mergesort(a,0,n-1);int sum=k;int u=0;int l;int j;
+    for(int i=0;i<n-1;i++)
+    {
+        sum=sum-a[i];
+        l=i+1;
+        j=n-1;
+        while(l<j)
+        {t=(a[l]+a[j]);
+            if(t==sum)
+            {u=1;break;
+            }
+            else if(t<sum)
+            l++;
+            else if(t>sum)
+            j--;
+        }
+        if(u==1)
+        break;
+        sum=k;
+        
+    }
+    if(u==1)
+    System.out.println("true");
+    else
+    System.out.println("false");
+   
+    }
+     }
+}

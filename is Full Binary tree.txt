@@ -1,0 +1,54 @@
+// full binary tree is a tree with either 0 or 2 childs so for suppose as recursion assumption if root==null returning true if leaf node return true(as it has 0 childs) else if left !=null and right not equal to null means node with 2 childs then check root.left and root.right else(means root with 1 child )-returning false  
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node left,right;
+    Node(int k){
+        data=k;
+        left=right=null;
+    }
+}
+public class Solution {
+   static Node insert(Node root,int k){
+        if(root==null)
+            return new Node(k);
+        else if(k>root.data)
+            root.right=insert(root.right,k);
+       else
+           root.left=insert(root.left,k);
+   return root; 
+   }
+    
+    static boolean meth(Node root){
+        if(root==null)
+            return true;
+        if((root.left==null)&&(root.right==null))
+            return true;
+        if((root.left!=null)&&(root.right!=null))
+            return ((meth(root.left))&&meth(root.right));
+        else
+            return false;
+        
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner s=new Scanner(System.in);
+        int t=s.nextInt();
+        StringBuilder sb=new StringBuilder();
+        while(t-->0){
+            int n=s.nextInt();
+            Node root=null;
+            for(int i=0;i<n;i++)
+            {
+                root=insert(root,s.nextInt());
+            }
+            if(meth(root))
+            sb.append("True\n");
+            else
+                sb.append("False\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

@@ -1,0 +1,72 @@
+                              
+                                       V
+                                  V-1     V+1
+                                V-2         V+2
+//In this way while moving left v=v-1 and right v=v+1take a hashmap<Integer,List<Integer>> where key is v and value is list as it stores corresponding elements of the currrent vertical level and if hashmapnot containskey v put(v,new list then add elements into list
+//then move left and right in this way print the elements here mv stores the minimum v value and list elements are being printed in sorted order as keys(v) are continuous so for loop starts at minimum v value and goes on untill last key then as +1 of lastkey is not a key of hashmap breaking the loop there.
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;Node left;Node right;
+    Node(int l){
+        data=l;
+        left=null;right=null;
+    }
+}
+public class Solution {
+    static int mv=Integer.MAX_VALUE;
+    static Node insert(Node root,int val){
+        if(root==null){
+            root=new Node(val);
+        }
+        else if(root.data>=val){
+            root.left=insert(root.left,val);
+        }
+        else{
+            root.right=insert(root.right,val);
+        }
+        return root;
+    }
+    static void vertical(Node root,HashMap<Integer,List<Integer>> hp,int v){
+        if(root==null)
+        return ;
+        if(!hp.containsKey(v))
+            hp.put(v,new ArrayList<Integer>());
+        hp.get(v).add(root.data);
+        mv=Math.min(mv,v);
+        vertical(root.left,hp,v-1);
+        vertical(root.right,hp,v+1);
+        
+    }
+  
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner s=new Scanner(System.in);
+        int t=s.nextInt();
+        StringBuilder sb=new StringBuilder();
+        while(t-->0){
+         mv=Integer.MAX_VALUE;
+            int n=s.nextInt();
+            Node root=null;
+            for(int i=0;i<n;i++){
+                root=insert(root,s.nextInt());
+            }
+        HashMap<Integer,List<Integer>> hp=new HashMap<>();int v=0;
+        vertical(root,hp,v);
+            int a=mv;int l=Integer.MAX_VALUE;
+        for(int i=a;i<=l;i++){
+            if(hp.containsKey(i)){
+                List<Integer> lp=hp.get(i);
+                Collections.sort(lp);
+                for(int x:lp){
+                    sb.append(x+" ");
+                }
+            }
+            else
+            break;
+            sb.append("\n");
+        }
+        sb.append("\n");}System.out.println(sb.toString());
+        
+    }
+}

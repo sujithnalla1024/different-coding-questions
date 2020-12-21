@@ -1,0 +1,58 @@
+//To find depth of each node and print in insertion order take a depth variable in Node class and while inserting while moving left pass d-1 and moving right pass d+1 and soon after inserting one element search for it and return its node using search function and print depth of returned node   
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node left;
+    Node right;
+    int depth;
+    Node(int f,int r){
+        data=f;
+        depth=r;
+    }
+}
+public class Solution {
+    static Node insert(Node root,int k,int d){
+        if(root==null){
+            return new Node(k,d);
+        }
+        if(k>root.data){
+            root.right=insert(root.right,k,d+1);
+        
+        }else{
+         root.left=insert(root.left,k,d+1);   
+        }
+        return root;
+        
+    }
+    static Node search(Node root,int l){
+        if(root.data==l){
+            return root;
+        }
+        else if(l>root.data)
+           return search(root.right,l);
+        else
+           return search(root.left,l);
+    }
+    
+    
+
+    public static void main(String[] args) {
+       Scanner s=new Scanner(System.in);
+        StringBuilder sb=new StringBuilder();
+        int t=s.nextInt();
+        while(t-->0){
+            int n=s.nextInt();
+            Node root=null;
+            for(int i=0;i<n;i++)
+            {
+                int l=s.nextInt();
+                root=insert(root,l,0);
+                Node temp=search(root,l);
+                sb.append(temp.depth+" ");
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

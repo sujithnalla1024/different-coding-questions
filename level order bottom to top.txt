@@ -1,0 +1,62 @@
+//as this list of list returns level by level order printing this list of list in reverse list order to print level by level order last to first
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;Node left,right;
+    Node(int l){
+        data=l;
+        left=right=null;
+    }
+}
+public class Solution {
+    static Node insert(Node root,int k){
+        if(root==null)
+            return new Node(k);
+        else if(k>root.data)
+            root.right=insert(root.right,k);
+        else
+            root.left=insert(root.left,k);
+        return root;
+    }
+    static List<List<Integer>> botup(Node root){
+        List<List<Integer>> lt=new ArrayList<>();
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            List<Integer> list=new ArrayList<>();
+            int length=q.size();
+            for(int i=0;i<length;i++){
+                Node temp=q.poll();
+                if(temp.left!=null)
+                    q.add(temp.left);
+                if(temp.right!=null)
+                    q.add(temp.right);
+                list.add(temp.data);
+            }
+            lt.add(list);
+        }
+        return lt;
+    }
+
+    public static void main(String[] args) {
+    Scanner s=new Scanner(System.in);
+        StringBuilder sb=new StringBuilder();
+        int t=s.nextInt();
+        while(t-->0){
+         int n=s.nextInt();   
+            Node root=null;
+            for(int i=0;i<n;i++){
+            root=insert(root,s.nextInt());
+            }
+            List<List<Integer>> lt=botup(root);
+            for(int i=lt.size()-1;i>=0;i--){
+                for(int x:lt.get(i)){
+                    sb.append(x+" ");
+                }
+                sb.append("\n");
+            }
+            sb.append("\n");
+        
+        }System.out.println(sb.toString());
+    }
+}

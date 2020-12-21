@@ -1,0 +1,20 @@
+//minimum charecters to be removed for adjacent charecters not to be same
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+String x=s.next();int l=0;int count=1;
+for(int i=0;i<x.length()-1;i++)
+{
+    if(x.charAt(i)==x.charAt(i+1))
+    count++;
+    else
+    {
+        if(count>1)
+    l=l+(count-1);count=1;}
+}
+l=l+(count-1);
+System.out.print(l);
+	}
+}

@@ -1,0 +1,33 @@
+//Let dp(i) denotes noof ways to get sum i using dice then it will be dependent on dp(i-1),dp(i-2),.....dp(i-6)
+//As above stated we can go to dp(i) from any of above state using one single way(from dp(i-1) we can get to dp(i) by throwing 1)+from dp(i-2) we can get to dp(i) by throwing 2)+(from dp(i-3) we can get to dp(i) by throwing 3)+.............
+//So dp(i)=dp(i-1)+dp(i-2)+dp(i-3)+dp(i-4)+dp(i-5)+dp(i-6);  
+import java.io.*;
+import java.util.*;
+public class Solution {
+    static long m=1000000007;
+    
+    
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner s=new Scanner(System.in);
+        
+   StringBuilder sb=new StringBuilder();
+    long dp[]=new long[100001];
+        dp[0]=1;
+        for(int i=1;i<=100000;i++){
+            long k=0;
+            for(int j=1;((i-j>=0)&&(j<=6));j++){
+         k=((k%m)+(dp[i-j]%m))%m;
+                }
+        dp[i]=k;
+        }
+    //return dp[n]%m;
+    int t=s.nextInt();
+        while(t-->0){
+            int n=s.nextInt();
+            sb.append(dp[n]+"\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

@@ -1,0 +1,39 @@
+//To get maximum non adjacent subsequence at ith position we need to get maximum non adjcent subsequence sum till i-2 position and add it to current ith element as i-1th position is not valid as mentioned maximum non adjacent subsequence sum
+//for 3rd array element we need to add frst element to it if frstelement is +ve and update max at each iteration with i-1th position as next step we can include the 2nd array value in non adjacent subsequence.
+import java.io.*;
+import java.util.*;
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        StringBuilder sb=new StringBuilder();
+        int t=s.nextInt();
+        while(t-->0){
+            int n=s.nextInt();
+          int a[]=new int[n];
+          for(int i=0;i<n;i++){
+            a[i]=s.nextInt();
+          }
+          int temp[]=new int[n];int ans;
+          if(n>1){
+          temp[0]=a[0];temp[1]=a[1];
+         int max=Math.max(0,a[0]);
+          for(int i=2;i<n;i++){
+            temp[i]=max+a[i];
+            max=Math.max(temp[i-1],max);
+          }
+          //int end=0;int ans=temp[0];
+           ans=temp[0];
+          for(int i=1;i<n;i++){
+            ans=Math.max(ans,temp[i]);
+          }}
+          else if(n==1)
+            ans=a[0];
+          else
+            ans=Math.max(a[0],a[1]);
+          
+          sb.append(ans+"\n");
+        }
+      System.out.println(sb.toString());
+    }
+}

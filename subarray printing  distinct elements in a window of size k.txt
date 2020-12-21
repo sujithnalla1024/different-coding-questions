@@ -1,0 +1,100 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void meth(int a[],int n,int m)
+    {
+        StringBuilder sb=new StringBuilder();
+        HashMap<Integer,Integer> hp=new HashMap<>();
+            for(int i=0;i<m;i++)
+            {
+                if(hp.containsKey(a[i]))
+                   hp.put(a[i],hp.get(a[i])+1);
+                else
+                    hp.put(a[i],1);
+            }
+            int l=0;sb.append(hp.size()).append(" ");
+            for(int i=m;i<n;i++)
+            {
+                if(hp.containsKey(a[i]))
+                   hp.put(a[i],hp.get(a[i])+1);
+                else
+                    hp.put(a[i],1);
+                if(hp.get(a[l])==1)
+                    hp.remove(a[l]);
+                else
+                    hp.put(a[l],(hp.get(a[l])-1));
+                sb.append(hp.size()).append(" ");
+                l++;
+            }
+        System.out.println(sb.toString());
+    }
+    static class FastReader
+{
+BufferedReader br;
+StringTokenizer st;
+public FastReader()
+{
+br = new BufferedReader(new
+InputStreamReader(System.in));
+}
+String next()
+{
+while (st == null || !st.hasMoreElements())
+{
+try
+{
+st = new StringTokenizer(br.readLine());
+}
+catch (IOException e)
+{
+e.printStackTrace();
+}
+}
+return st.nextToken();
+}
+int nextInt()
+{
+return Integer.parseInt(next());
+}
+long nextLong()
+{
+return Long.parseLong(next());
+}
+double nextDouble()
+{
+return Double.parseDouble(next());
+}
+String nextLine()
+{
+String str = "";
+try
+{
+str = br.readLine();
+}
+catch (IOException e)
+{
+e.printStackTrace();
+}
+return str;
+}
+}
+
+    public static void main(String[] args)throws IOException {
+    FastReader fs=new FastReader();
+        
+        int u=fs.nextInt();
+        for(int k=0;k<u;k++)
+        {
+            int n=fs.nextInt();
+            int m=fs.nextInt();
+        int a[]=new int[n];
+            for(int i=0;i<n;i++)
+        a[i]=fs.nextInt();
+            meth(a,n,m);
+        }
+    }
+}

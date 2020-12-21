@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args)throws IOException {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb=new StringBuilder();
+        int n=Integer.parseInt(br.readLine());
+        while(n-->0){
+        int w=Integer.parseInt(br.readLine());
+            int a[]=new int[w];int x=0;
+            StringTokenizer st=new StringTokenizer(br.readLine());
+            while(st.hasMoreTokens())
+            {
+            a[x]=Integer.parseInt(st.nextToken());x++;
+                }
+            int count=0;
+            int lp[]=new int[w];
+            int rp[]=new int[w];
+            rp[w-1]=a[w-1];
+            lp[0]=a[0];
+            for(int i=1;i<w;i++)
+            {
+                if(a[i]>=lp[i-1])
+                    lp[i]=a[i];
+                else
+                    lp[i]=lp[i-1];
+            }
+            for(int i=w-2;i>=0;i--)
+            {
+                if(rp[i+1]>=a[i])
+                    rp[i]=rp[i+1];
+                else
+                    rp[i]=a[i];
+                    
+            }
+            for(int i=0;i<w;i++)
+            {
+                if(lp[i]<=rp[i])
+                    count+=Math.abs(a[i]-lp[i]);
+                else
+                    count+=Math.abs(a[i]-rp[i]);
+            }
+            sb.append(count+"\n");
+            }
+        System.out.println(sb.toString());
+    }
+}

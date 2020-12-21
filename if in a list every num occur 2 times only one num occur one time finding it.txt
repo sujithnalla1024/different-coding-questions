@@ -1,0 +1,9 @@
+//programme to find unique element every element occurs twice only one element occurs once 
+void meth(int a[])
+{  int k=a[0];
+for(int i=1;i<a.length();i++)
+  {
+        k=k^a[i];
+  }
+   print(k);
+}

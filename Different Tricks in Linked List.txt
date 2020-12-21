@@ -1,0 +1,9 @@
+1)To Print Middle of Linked List
+----------------------------------------
+take two pointers pointing to head initially.Then while moving one pointer as 2 steps futher as(temp.next.next) move other by one step(temp.next) while one reaches the end other lands at middle;
+
+
+
+2)Finding nth node from end
+------------------------------------------------------------------------
+Take two pointers one must frst travel to n nodes further initially then starting moving both pointers at a time while the one which started initially reaches end other reaches the nth node from end

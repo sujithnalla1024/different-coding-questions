@@ -1,0 +1,32 @@
+//pushing all elements that are greater than a[] in to stack and if a[i]>a[top] pop all elements and assign popped elements value in b[i] as a[i] and repeat this process here we r pushing indices of elements not the values opp for smaall elements on right 
+
+import java.util.*;
+import java.io.*;
+public class GFG{
+
+     public static void main(String []args){
+        Scanner s=new Scanner(System.in);
+        int t=s.nextInt();
+        for(int e=0;e<t;e++)
+        {
+            int n=s.nextInt();
+            long a[]=new long[n];
+            for(int y=0;y<n;y++)
+            a[y]=s.nextLong();
+            long b[]=new long[n];
+            Arrays.fill(b,-1);
+            Stack<Integer> st=new Stack<>();
+            for(int i=0;i<n;i++)
+            {
+                while(!st.isEmpty()&&(a[i]>=a[st.peek()]))
+                {
+                    b[st.peek()]=a[i];
+                    st.pop();
+                }
+                st.push(i);
+            }
+        for(long y:b)
+        System.out.print(y+" ");
+        System.out.println();
+     }}
+}

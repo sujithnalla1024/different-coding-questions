@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class tha{
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner s=new Scanner(System.in);
+        String a="sujsujsu";
+        char b[]=a.toCharArray();
+        int i=0,j=a.length()/2;
+        if(a.length()<2)
+            System.out.print(0);
+        else{
+        while(j<a.length())
+        {
+            if(a.charAt(i)==a.charAt(j))
+            {
+                ++i;
+                ++j;
+            }
+            else{
+             if(i==0)
+            {
+                j++;
+            }
+            else
+                --i;}
+        }
+        System.out.print(i);}
+    }
+}

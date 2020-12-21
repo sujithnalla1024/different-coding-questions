@@ -1,0 +1,2 @@
+// if frst row is blocked all elements after it in frst row are also blocked and similarly if any element in colum is blocked all elements after it are also blocked and if any other cell is blocked make dp[i,j] of corresponding cell as 0
+and as we can move right,down,rightdowndiagonally,so dp(i,j)=dp(i-1,j)+dp(i,j-1)+dp(i-1,j-1) 

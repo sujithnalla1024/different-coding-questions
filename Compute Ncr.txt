@@ -1,0 +1,35 @@
+// As we know Ncr=(N-1)cR+(N-1)cR-1
+so let rows denote n and columns denore r so dp(n,r)=dp(n-1,r-1)+dp(n-1,r)
+//as we need ncr so take table size as n+1*r+1  and last element is our answer
+//0c0=1 0c1,0c2,....=0,,,----1c0,2c0,3c0==1
+
+import java.io.*;
+import java.util.*;
+public class Solution {
+static int m=1000000007;
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+      Scanner s=new Scanner(System.in);
+      StringBuilder sb=new StringBuilder();
+      int dp[][]=new int[2001][2001];
+      for(int q=1;q<=2000;q++){
+        dp[0][q]=0;
+      }
+      for(int l=0;l<=2000;l++){
+        dp[l][0]=1;
+      }
+      for(int i=1;i<=2000;i++){
+        for(int j=1;j<=2000;j++){
+          dp[i][j]=(dp[i-1][j]%m+dp[i-1][j-1]%m)%m;
+        }
+      }
+      int t=s.nextInt();
+      while(t-->0){
+        int n=s.nextInt();
+        int r=s.nextInt();
+        sb.append(dp[n][r]+"\n");
+      }
+      System.out.println(sb.toString());
+      
+    }
+}

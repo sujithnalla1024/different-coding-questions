@@ -1,0 +1,55 @@
+//if search element not found return -1; else return the index of search element finding the break point the array as index l and binary searching on both sides of l
+import java.util.*;
+public class HelloWorld{
+    static int meth(int a[],int l,int k)
+    {
+        if(l==-1)
+        {
+            return bsearch(a,0,a.length-1,k);
+        }
+        else
+        {
+            int q=bsearch(a,0,l,k);int p=bsearch(a,l+1,a.length-1,k);
+          if(p!=-1)
+          return p;
+          else if(q!=-1)
+          return q;
+          return -1;
+        }
+    }
+    static int bsearch(int a[],int low,int high,int k)
+    {
+            while(low<=high)
+            {
+                int mid=(low+high)/2;
+                if(a[mid]==k)
+                return mid;
+                else if(a[mid]>k)
+                high=mid-1;
+                else
+                low=mid+1;
+            }
+        
+        return -1;
+    }
+
+     public static void main(String []args){
+      Scanner s=new Scanner(System.in);
+      int n=s.nextInt();
+      int a[]=new int[n];
+      for(int i=0;i<n;i++)
+      a[i]=s.nextInt();
+      int k=s.nextInt();
+      int l=-1;
+      for(int i=0;i<n-1;i++)
+      {
+          if(a[i]<a[i+1])
+          continue;
+          else
+          {
+            l=i;break;
+          }
+      }
+      System.out.println(meth(a,l,k));
+     }
+}

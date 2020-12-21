@@ -1,0 +1,56 @@
+/*package whatever //do not write package name here */
+//first count no of zeros in prefix array and then count freq of repeated no using map for each map.value>2 count+=((map.value)*(map.value-1))/2
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class GFG {
+	public static void main (String[] args)throws IOException{
+		//code
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb=new StringBuilder();
+		int t=Integer.parseInt(br.readLine());
+		while(t-- >0)
+		{
+		    int n=Integer.parseInt(br.readLine());
+		    int a[]=new int[n];
+		    int w=0;
+		    StringTokenizer st=new StringTokenizer(br.readLine());
+		    while(st.hasMoreTokens())
+		    {
+		        a[w]=Integer.parseInt(st.nextToken());
+		        w++;
+		    }
+		    HashSet<Integer> hs=new HashSet<>();
+		    int pr[]=new int[n];pr[0]=a[0];
+		   // hs.add(a[0]);
+		    for(int i=1;i<n;i++)
+		    {
+		        pr[i]=pr[i-1]+a[i];
+		    }
+		    int count=0;
+		    for(int i=0;i<n;i++)
+		    {
+		        if(pr[i]==0)
+		        count++;
+		    }
+		    HashMap<Integer,Integer> hp=new HashMap<>();
+		    for(int i=0;i<n;i++)
+		    {
+		        if(hp.containsKey(pr[i]))
+		        hp.put(pr[i],hp.get(pr[i])+1);
+		        else
+		        hp.put(pr[i],1);
+		    }
+		    for(int e:hp.values())
+		    {
+		        if(e>1)
+		        {
+		            count+=((e*(e-1))/2);
+		        }
+		    }
+		    sb.append(count+"\n");
+		}
+		System.out.println(sb.toString());
+	}
+}

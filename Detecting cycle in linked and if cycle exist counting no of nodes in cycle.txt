@@ -1,0 +1,30 @@
+static Node check(Node head)//checks the cycle if cycle exists returns the point of intersection of cycle else returns null
+    {
+        Node p1=head,p2=head;Node temp=null;
+        while((p2!=null)&&(p2.next!=null))
+        {
+            p1=p1.next;p2=p2.next.next;
+            if(p1==p2)
+            {
+             return p1;   
+            }
+        }
+        return temp;
+        
+    }
+    static int countNodesinLoop(Node head)
+    {
+        
+        Node temp=check(head);
+        if(temp==null)
+        return 0;
+        else//as returns not null so temp has one node in cycle so while .next is not that one again count++ it gives the no of nodes in cycle
+        {
+            Node p=temp;int count=1;
+            while(p.next!=temp)
+            {
+                p=p.next;count++;
+            }
+            return count;
+        }
+    }

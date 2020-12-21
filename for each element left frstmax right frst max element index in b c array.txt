@@ -1,0 +1,37 @@
+import java.util.*;
+
+//for each element in a[i]-----> b[i] and c[i] has frst left max element index of a[i] and right side of a[i]
+
+public class HelloWorld{
+
+     public static void main(String []args){
+        int a[]={2,5,8,6,3,7,9};
+        int b[]=new int[a.length];
+        Arrays.fill(b,0);
+        Stack<Integer> st=new Stack<>();
+        for(int i=a.length-1;i>=0;i--)
+        {
+            while((!st.isEmpty())&&(a[st.peek()]<a[i]))
+            {
+                
+                b[st.peek()]=i;
+                st.pop();
+            }
+            st.push(i);
+        }
+        System.out.println(Arrays.toString(b));
+        Stack<Integer> st1=new Stack<>();
+        int c[]=new int[a.length];
+        Arrays.fill(c,0);
+        for(int i=0;i<a.length;i++)
+        {
+            while((!st1.isEmpty())&&(a[st1.peek()]<a[i]))
+            {
+             c[st1.peek()]=i;
+                st1.pop();
+            }
+            st1.push(i);
+        }
+        System.out.println(Arrays.toString(c));
+     }
+}

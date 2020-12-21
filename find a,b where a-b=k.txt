@@ -1,0 +1,49 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+//two pointer technique where first pointer points first and second pointer points second element 
+import java.util.*;
+public class Solution
+{
+    static int dif(int a[],int k)
+    {
+        int i=0,j=1;int count=0;
+        while((i<a.length)&&(j<a.length))
+        {
+            if((a[j]-a[i])==k){
+                count++;i++;j++;}
+            else if((a[j]-a[i])<k)
+                j++;
+            else
+                i++;
+        }
+        
+        return count;
+        
+    }
+   
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        int m=s.nextInt();
+        for(int u=0;u<m;u++)
+        {
+            int n=s.nextInt();
+            int k=s.nextInt();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
+          a[i]=s.nextInt();
+        ARrays
+       
+           System.out.println(dif(a,k)==1);
+            
+        
+        }
+    }
+    
+}
+

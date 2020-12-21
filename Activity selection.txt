@@ -1,0 +1,58 @@
+//given start and end time of an activity count howmany maximum activities are being done
+//logic is frst sort arrays based on their end times using comparable then we get b and c array with end times sorted order then using two pointer technique count noof activities are maximum executed 
+import java.util.*;
+import java.io.*;
+class sujith implements Comparable<sujith>{
+    int a,b;
+    sujith(int x,int y){
+        a=x;b=y;
+    }
+   public int compareTo(sujith t){
+        return this.b-t.b;
+    }
+}
+public class MyClass {
+    public static void main(String args[]) {
+     Scanner s=new Scanner(System.in);
+     int t=s.nextInt();
+     while(t-->0){
+     //System.out.println("Enter n value");
+     int n=s.nextInt();
+     ArrayList<sujith> ob=new ArrayList<>();
+     //System.out.println("Enter the array list elements");
+     int p[]=new int[n];
+     int q[]=new int[n];
+     for(int i=0;i<n;i++)
+     p[i]=s.nextInt();
+     for(int j=0;j<n;j++)
+     q[j]=s.nextInt();
+     for(int i=0;i<n;i++){
+         ob.add(new sujith(p[i],q[i]));
+     }
+     Collections.sort(ob);
+     int b[]=new int[n];
+     int c[]=new int[n];
+     int u=0;
+     for(sujith w:ob)
+      {b[u]=w.a;
+      c[u]=w.b;
+      u++;
+      }
+      //System.out.println(Arrays.toString(b));
+      //System.out.println(Arrays.toString(c));
+      int p1=1;int p2=0;//two pointer technique move p1 when it is less than p2 once it is greater than p2 take p2 near p1 and increment count and continue this process untill one of them is reaching end
+      int count=1;
+      while((p1<n)&&(p2<n)){
+          if((b[p1]<c[p2])||(p1==p2))
+          {
+              p1++;
+          }
+          else{
+              count++;
+              p2=p1;
+          }
+      }
+      System.out.println(count);
+     }
+    }
+}

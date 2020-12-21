@@ -1,0 +1,48 @@
+//height of tree is root's height i.e., 1+max(left height and right height) here root elements height is considered as 0 so if root==null returning -1 if root height is considered as 1 then root==null must be returned 0;
+
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int f){
+        data=f;
+    }
+}
+public class Solution {
+    static Node insert(Node root,int k){
+        if(root==null){
+            return new Node(k);
+        }
+        if(root.data<=k){
+            root.right=insert(root.right,k);
+        
+        }else{
+         root.left=insert(root.left,k);   
+        }
+        return root;
+        
+    }
+    static int height(Node root){
+        if(root==null)
+            return -1;
+        return (1+Math.max(height(root.left),height(root.right)));
+    }
+
+    public static void main(String[] args) {
+       Scanner s=new Scanner(System.in);
+        int t=s.nextInt();
+        StringBuilder sb=new StringBuilder();
+        while(t-->0){
+            int n=s.nextInt();
+            Node root=null;
+            for(int i=0;i<n;i++)
+            {
+                root=insert(root,s.nextInt());
+            }
+            sb.append(height(root)+"\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

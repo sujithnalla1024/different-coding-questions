@@ -1,0 +1,75 @@
+//in this programme taking a queue adding root in to it popping it and adding its left and right childs and popping out them front and they are added at rear end at every stage we are adding elements in to new array list and all this array list objects are addend in to new listoflist obj and returned so this list of list contains tree elements as level by level order 
+
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;Node left;Node right;
+    Node(int k){
+        data=k;
+        left=right=null;
+    }
+}
+public class Solution {
+    static Node insert(Node root,int k){
+        if(root==null)
+            return new Node(k);
+        else if(k>root.data)
+            root.right=insert(root.right,k);
+        else
+            root.left=insert(root.left,k);
+        return root;
+    }
+   /* static void print(Node root){
+        if(root==null)
+            return;
+        print(root.left);
+        print(root.right);
+        System.out.println(root.data);
+    }*/
+    static List<List<Integer>> zigzag(Node root){
+        List<List<Integer>> lt=new ArrayList<>();
+        if(root==null)
+            return null;
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        int level=1;
+        while(!q.isEmpty()){
+            int w=q.size();
+            List<Integer> list=new ArrayList<>();
+            for(int i=0;i<w;i++){
+                Node temp=q.poll();
+                if(temp.left!=null)
+                    q.add(temp.left);
+                if(temp.right!=null)
+                    q.add(temp.right);
+                    list.add(temp.data);
+            }
+            //level++;
+            lt.add(list);
+            
+        }
+        return lt;
+        
+    }
+
+    public static void main(String[] args) {
+        Scanner s=new Scanner(System.in);
+        StringBuilder sb=new StringBuilder();
+        int t=s.nextInt();
+        while(t-->0){
+         int n=s.nextInt();
+            Node root=null; 
+            for(int i=0;i<n;i++){
+                root=insert(root,s.nextInt());
+            }
+            List<List<Integer>> b=zigzag(root);
+            for(List<Integer> x : b){
+                for(int y: x){
+                    sb.append(y+" ");
+                }sb.append("\n");
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
+    }
+}

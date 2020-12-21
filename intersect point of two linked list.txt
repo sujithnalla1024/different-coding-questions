@@ -1,0 +1,25 @@
+class Intersect//pushing all head A into hashset of nodes then comparing in b if any of b matches with a's node or not if yes returning the nodes data by storing in l else returning -1 
+{
+	int intersectPoint(Node headA, Node headB)
+	{
+         // code here
+         Node a=headA;
+         HashSet<Node> hs=new HashSet<>();
+         while(a!=null){
+         a=a.next;
+             hs.add(a);
+         }
+         int l=-1;
+         Node b=headB;
+         while(b!=null){
+             if(hs.contains(b))
+             {
+                 l=b.data;
+                 break;
+             }
+             b=b.next;
+         }
+         return l;
+         
+	}
+}

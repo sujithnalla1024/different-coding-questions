@@ -1,0 +1,22 @@
+import java.util.*;
+public class HelloWorld{
+    static int lengthOfLongestSubstring(String A) {
+        HashSet<Character> hashSet = new HashSet<Character>();
+        int maxCount = 0;
+        int start = 0;
+        for(char c : A.toCharArray()){
+            while(hashSet.contains(c)){
+                hashSet.remove(A.charAt(start));
+                start++;
+            }
+            hashSet.add(c);
+            maxCount = Math.max(maxCount, hashSet.size());
+        }
+        
+        return maxCount;
+    }
+
+     public static void main(String []args){
+        System.out.println(lengthOfLongestSubstring("abcabcab"));
+     }
+}

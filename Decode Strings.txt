@@ -1,0 +1,41 @@
+//a -> 0, b -> 1, c -> 2, .... z -> 25.
+// Now, Bob wants to know the number of different ways he can decrypt a
+// to append a charecter at ith position dp(i) it will be equal to noof ways to fill i-1 places dp(i-1) as new charcter entering may be any thing b/w 0 to 9 so it can be added as single charecter to all previous dp(i-1)'s ways and as new charecter is appended it may form a pair with i-1s position so to form a pair i-1th and ith position combined must be >=10 and<=25 So +dp(i-2) if i-1 and ith will be in rabge 10-25
+//So --->dp(i)=dp(i-1)+dp(i-2)// if(i-1th and ith will be range 10-25)
+else ---->dp(i)=dp(i-1)
+import java.io.;
+import java.util.;
+public class Solution {
+    static int m=1000000007;
+    static int meth(String a,int n){
+       int dp[]=new int[n];
+        dp[0]=1;
+        if((a.charAt(0)=='1')((a.charAt(0)=='2')&&(a.charAt(1)='5')))
+        dp[1]=2;
+        else
+            dp[1]=1;
+        for(int i=2;in;i++){
+            if((a.charAt(i-1)=='1')((a.charAt(i-1)=='2')&&(a.charAt(i)='5')))
+                dp[i]=(dp[i-1]%m+dp[i-2]%m)%m;
+            else
+                dp[i]=dp[i-1]%m;
+        
+        }
+        
+        return dp[n-1];
+    }
+
+    public static void main(String[] args) {
+         Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. 
+        Scanner s=new Scanner(System.in);
+        int t=s.nextInt();
+        StringBuilder sb=new StringBuilder();
+        while(t--0){
+            int n=s.nextInt();
+            s.nextLine();
+            String a=s.next();
+            sb.append(meth(a,n)+n);
+        }
+        System.out.println(sb.toString());
+    }
+}

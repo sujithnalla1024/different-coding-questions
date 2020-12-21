@@ -1,0 +1,47 @@
+/*package whatever //do not write package name here */
+//in this sub array of zero exists when there is a zero in prefix array or prefix array has repeated elements in it,
+using hash set as it takes O(1) tc for contains method.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class GFG {
+	public static void main (String[] args)throws IOException{
+		//code
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb=new StringBuilder();
+		int t=Integer.parseInt(br.readLine());
+		while(t-- >0)
+		{
+		    int n=Integer.parseInt(br.readLine());
+		    int a[]=new int[n];
+		    int w=0;
+		    StringTokenizer st=new StringTokenizer(br.readLine());
+		    while(st.hasMoreTokens())
+		    {
+		        a[w]=Integer.parseInt(st.nextToken());
+		        w++;
+		    }
+		    HashSet<Integer> hs=new HashSet<>();
+		    int pr[]=new int[n];pr[0]=a[0];
+		   // hs.add(a[0]);
+		    for(int i=1;i<n;i++)
+		    {
+		        pr[i]=pr[i-1]+a[i];
+		    }
+		    int temp=1;
+		    for(int i=0;i<n;i++)
+		    {
+		        if(hs.contains(pr[i])||(pr[i]==0))
+		        {temp=0;break;}
+		        else
+		        hs.add(pr[i]);
+		    }
+		    if(temp==0)
+		    sb.append("Yes"+"\n");
+		    else
+		    sb.append("No"+"\n");
+		}
+		System.out.println(sb.toString());
+	}
+}
