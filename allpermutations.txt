@@ -49,5 +49,3 @@ public class Main
 	} 
 
 } 
-
-// This code is contributed by Mihir Joshi 
